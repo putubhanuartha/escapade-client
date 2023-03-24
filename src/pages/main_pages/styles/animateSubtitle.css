@@ -1,0 +1,29 @@
+.animateSubtitle{
+    animation: animate 5s ease-in-out infinite alternate ;
+    -webkit-animation: animate 5s ease-in-out infinite alternate ;
+}
+/* 1.8 rem , 3.6 rem */
+@keyframes animate {
+    0%{
+        transform: translateY(0rem);
+        -webkit-transform: translateY(0rem);
+        -moz-transform: translateY(0rem);
+        -ms-transform: translateY(0rem);
+        -o-transform: translateY(0rem);
+}
+    50%{
+        transform: translateY(-2.4rem);
+        -webkit-transform: translateY(-2.4rem);
+        -moz-transform: translateY(-2.4rem);
+        -ms-transform: translateY(-2.4rem);
+        -o-transform: translateY(-2.4rem);
+}
+    100%{
+        transform: translateY(-4.58rem);
+        -webkit-transform: translateY(-4.58rem);
+        -moz-transform: translateY(-4.58rem);
+        -ms-transform: translateY(-4.58rem);
+        -o-transform: translateY(-4.58rem);
+}
+}
+
