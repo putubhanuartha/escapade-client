@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef,  } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.css";
 import { Pagination, Navigation } from "swiper";
@@ -22,7 +22,7 @@ export default function TravelContainer() {
 			</div>
 			<div
 				id="card_container"
-				className="relative max-w-full mx-auto"
+				className="relative max-w-full mx-auto mt-7"
 			>
 				<Swiper
 					slidesPerGroup={1}
@@ -69,13 +69,13 @@ export default function TravelContainer() {
 				</Swiper>
 				<button
 					ref={refPrev}
-					className="left-0 top-[50%] bg-white  rounded-full p-4 -translate-y-[50%] absolute z-40 shadow-[0px_0px_15px_2px_rgba(0,0,0,0.2)]"
+					className="left-0 top-[50%] bg-white  rounded-full p-4 -translate-y-[50%] absolute z-30 shadow-[0px_0px_15px_2px_rgba(0,0,0,0.2)]"
 				>
 					<AiFillCaretLeft />
 				</button>
 				<button
 					ref={refNext}
-					className="right-0 top-[50%] bg-white p-4 rounded-full -translate-y-[50%] absolute z-40 shadow-[0px_0px_15px_2px_rgba(0,0,0,0.2)]"
+					className="right-0 top-[50%] bg-white p-4 rounded-full -translate-y-[50%] absolute z-30 shadow-[0px_0px_15px_2px_rgba(0,0,0,0.2)]"
 				>
 					<AiFillCaretRight />
 				</button>

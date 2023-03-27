@@ -8,7 +8,7 @@ export default function Header() {
 		useContext(GlobalAppContext);
 	return (
 		<div
-			className={`py-3 sm:py-4 lg:py-5 fixed z-30 left-0 right-0 ${
+			className={`py-3 sm:py-4 lg:py-5 fixed z-50 left-0 right-0 ${
 				isScrollUp ? "translate-x-0" : "-translate-y-36"
 			} duration-500 ${isOnTop ? "bg-transparent" : "bg-cyan-800"}`}
 		>

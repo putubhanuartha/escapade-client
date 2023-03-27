@@ -30,22 +30,20 @@ function App() {
 		return windowScroll == 0 ? true : false;
 	}
 	return (
-		<div className="h-[500vh]">
-			<GlobalAppContext.Provider
-				value={{
-					isSideBarActive,
-					setIsSidebarActive,
-					toggleTopBar,
-					setToggleTopBar,
-					isScrollUp,
-					isOnTop,
-				}}
-			>
-				<Header/>
-				<Sidebar/>
-				<MainPage/>
-			</GlobalAppContext.Provider>
-		</div>
+		<GlobalAppContext.Provider
+			value={{
+				isSideBarActive,
+				setIsSidebarActive,
+				toggleTopBar,
+				setToggleTopBar,
+				isScrollUp,
+				isOnTop,
+			}}
+		>
+			<Header />
+			<Sidebar />
+			<MainPage />
+		</GlobalAppContext.Provider>
 	);
 }
 
