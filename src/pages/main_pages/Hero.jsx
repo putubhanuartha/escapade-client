@@ -1,9 +1,21 @@
-import React from "react";
-import { heroSubtitle } from "../../contents/heroSubtitle";
+import React, { useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper.css";
+import { Pagination } from "swiper";
 import "./styles/animateSubtitle.css";
 import "./styles/animateTitle.css";
 import { HiOutlineMapPin } from "react-icons/hi2";
 export default function Hero() {
+	useEffect(() => {
+		const swipper_component =
+			document.querySelector("#swipper_component").swiper;
+		const sti = setInterval(() => {
+			swipper_component.slideNext();
+		}, 3000);
+		return () => {
+			clearInterval(sti);
+		};
+	}, []);
 	return (
 		<div className="m-auto">
 			<div className="flex flex-col items-center">
@@ -23,26 +35,46 @@ export default function Hero() {
 						</div>
 					</div>
 				</h2>
-				<div className="flex lg:mt-7 mt-3 md:mt-4 gap-1.5 md:gap-2 lg:gap-3 text-center  justify-center">
+				<div className="flex lg:mt-7 mt-3 md:mt-4 gap-1.5 md:gap-2 lg:gap-3 text-center justify-center">
 					<div className="h-7 md:h-9">
 						<p className="text-center sm:text-2xl md:text-3xl  font-medium tracking-wide font-poppins text-lg text-gray-700">
 							Explore
 						</p>
 					</div>
-					<div className="h-7 md:h-9 w-full max-w-[8rem] md:max-w-none md:w-fit  overflow-hidden">
-						<div className="w-full max-w-md h-fit animateSubtitle">
-							{heroSubtitle.map((el) => {
-								return (
-									<p
-										key={el.id}
-										className="text-center sm:text-2xl md:text-3xl font-medium tracking-wide font-poppins  text-lg text-gray-700"
-									>
-										{el.text}
-									</p>
-								);
-							})}
-						</div>
-					</div>
+					<Swiper
+						speed={1500}
+						loop={true}
+						id={"swipper_component"}
+						className="h-7 md:h-9 flex justify-center items-center xl:w-52 md:w-48"
+						direction="vertical"
+						spaceBetween={40}
+						pagination={{
+							clickable: true,
+						}}
+						modules={[Pagination]}
+					>
+						<SwiperSlide>
+							<div className="h-full  flex flex-col items-center justify-center">
+								<p className="sm:text-2xl md:text-3xl  text-gray-700 tracking-wide font-medium font-poppins">
+									Destinations
+								</p>
+							</div>
+						</SwiperSlide>
+						<SwiperSlide>
+							<div className="h-full  flex flex-col items-center justify-center">
+								<p className="sm:text-2xl md:text-3xl  text-gray-700 tracking-wide font-medium font-poppins">
+									Places
+								</p>
+							</div>
+						</SwiperSlide>
+						<SwiperSlide>
+							<div className="h-full  flex flex-col items-center justify-center">
+								<p className="sm:text-2xl md:text-3xl  text-gray-700 tracking-wide font-medium font-poppins">
+									Experiences
+								</p>
+							</div>
+						</SwiperSlide>
+					</Swiper>
 				</div>
 				<form
 					action="submit"

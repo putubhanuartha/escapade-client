@@ -4,6 +4,8 @@ import Hero from "./Hero";
 import { GlobalAppContext } from "../../App";
 import TravelContainer from "./TravelContainer";
 import BenefitCard from "./BenefitCard";
+import AttractionsContainer from "./AttractionsContainer";
+import StoryDropdownList from "./StoryDropdownList";
 
 export default function MainPage() {
 	// const { setToggleTopBar, toggleTopBar } = useContext(GlobalAppContext);
@@ -15,14 +17,17 @@ export default function MainPage() {
 					decoding="async"
 					src="/hero.webp"
 					alt="hero image"
-					className="absolute w-full h-full -z-30 object-cover"
+					className="absolute w-screen h-full -z-30 object-cover"
 				/>
 				<div className="container mx-auto flex h-full">
 					<Hero />
 				</div>
 			</div>
+
 			<TravelContainer />
-			<BenefitCard/>
+			<BenefitCard />
+			<AttractionsContainer />
+			<StoryDropdownList/>
 		</>
 	);
 }
