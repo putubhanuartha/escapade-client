@@ -1,13 +1,13 @@
-import React,{useRef} from "react";
+import React, { useRef } from "react";
 import "swiper/swiper.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import destinationData from "../../model/destinationData";
-
+import Card from "../../components/Card";
 function CityListComponent() {
-    const refPrev = useRef(null);
+	const refPrev = useRef(null);
 	const refNext = useRef(null);
 	return (
 		<>
