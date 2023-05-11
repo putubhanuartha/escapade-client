@@ -23,7 +23,7 @@ function ListFaq() {
 				</button>
 			</div>
 			<div
-				className={`bg-white px-7 ${
+				className={`bg-white px-0 md:px-4 lg:px-7 ${
 					isDropdownActive ? "h-full py-3" : "h-0 py-0 hidden"
 				} max-h-64 overflow-hidden`}
 			>
