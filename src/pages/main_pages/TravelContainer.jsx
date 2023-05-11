@@ -5,7 +5,7 @@ import { Pagination, Navigation } from "swiper";
 import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import destinationData from "../../model/destinationData";
-import Card from "../../components/Card";
+import Card from "./../../components/Card.jsx";
 
 export default function TravelContainer() {
 	const refPrev = useRef(null);
