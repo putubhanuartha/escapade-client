@@ -7,3 +7,4 @@ Frontend source code of escapade web application
  * /search-city
  * /search-hotel
  * /search-city/:id
+ * /faq
