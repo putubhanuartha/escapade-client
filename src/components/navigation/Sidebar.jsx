@@ -5,8 +5,12 @@ import { sidebarList } from "../../contents/sidebarList";
 
 import SidebarList from "./SidebarList";
 export default function Sidebar() {
-	const { isSideBarActive, setIsSidebarActive } =
-		React.useContext(GlobalAppContext);
+	const {
+		isSideBarActive,
+		setIsSidebarActive,
+		isDisplayAuthBox,
+		setIsDisplayAuthBox,
+	} = React.useContext(GlobalAppContext);
 	const [isClosed, setIsClosed] = useState(false);
 	useEffect(() => {
 		if (!isSideBarActive) {
@@ -16,7 +20,6 @@ export default function Sidebar() {
 		} else {
 			setIsClosed(false);
 		}
-
 	}, [isSideBarActive]);
 	return (
 		<div
@@ -75,6 +78,10 @@ export default function Sidebar() {
 
 			<div className="flex flex-col gap-4">
 				<button
+					onClick={() => {
+						setIsDisplayAuthBox(!isDisplayAuthBox);
+						setIsSidebarActive(!isSideBarActive);
+					}}
 					className={`text-green-100 font-raleway font-semibold text-2xl rounded-lg py-1 bg-cyan-600 ${
 						isSideBarActive
 							? "translate-y-0 opacity-1 delay-1600"

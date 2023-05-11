@@ -1,4 +1,4 @@
-import React from "react";
+	import React from "react";
 
 function OurPartners(props) {
 	return (
@@ -11,7 +11,7 @@ function OurPartners(props) {
 					{props.subtitle}
 				</p>
 			</div>
-			<div className="grid grid-cols-2 mt-5 sm:gap-x-20 sm:gap-y-10 md:grid-cols-4 place-items-center mx-auto max-w-md md:max-w-2xl lg:max-w-none">
+			<div className="grid grid-cols-2 mt-5 sm:gap-x-20 sm:gap-y-10 md:grid-cols-4 place-items-center mx-auto max-w-md md:max-w-2xl lg:max-w-none gap-y-7">
 				{props.data.map((el) => {
 					return (
 						<a

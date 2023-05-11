@@ -22,3 +22,14 @@
 	-ms-transition: z-index 2s;
 	-o-transition: z-index 2s;
 }
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {  
+   opacity: 1 !important;
+}
+.react-datepicker-popper {
+    z-index: 9999 !important;
+}
+.react-datepicker__input-container input{
+	padding: 0rem 0.5rem;
+	width: 100px;
+}

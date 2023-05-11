@@ -4,11 +4,16 @@ import { GlobalAppContext } from "../../App";
 import TopBar from "./TopBar";
 import { BsPersonCircle } from "react-icons/bs";
 export default function Header() {
-	const { setIsSidebarActive, isScrollUp, isOnTop } =
-		useContext(GlobalAppContext);
+	const {
+		setIsSidebarActive,
+		isScrollUp,
+		isOnTop,
+		isDisplayAuthBox,
+		setIsDisplayAuthBox,
+	} = useContext(GlobalAppContext);
 	return (
 		<div
-			className={`py-3 sm:py-4 lg:py-5 fixed z-50 left-0 right-0 ${
+			className={`py-3 sm:py-4 lg:py-5 fixed z-40 left-0 right-0 ${
 				isScrollUp ? "translate-x-0" : "-translate-y-36"
 			} duration-500 ${isOnTop ? "bg-transparent" : "bg-cyan-800"}`}
 		>
@@ -35,7 +40,12 @@ export default function Header() {
 					</div>
 				</div>
 				<div className="hidden lg:flex">
-					<button className="btn-profile">
+					<button
+						className="btn-profile"
+						onClick={() => {
+							setIsDisplayAuthBox(!isDisplayAuthBox);
+						}}
+					>
 						<BsPersonCircle
 							size={28}
 							color={`${isOnTop ? "#155e75" : "#d1d5db"}`}

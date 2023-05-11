@@ -40,7 +40,7 @@ export default function MainPage() {
 				subtitle={"Wego searches for the best deals on these sites & many more"}
 				data={travelPartnerData}
 			/>
-			<Footer/>
+			
 		</>
 	);
 }
