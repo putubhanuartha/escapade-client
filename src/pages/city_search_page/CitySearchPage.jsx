@@ -3,8 +3,7 @@ import "../hotel_search_page/styles/color.css";
 import { Route, Routes } from "react-router-dom";
 import ProductComponent from "./ProductComponent";
 import PlacesDetails from "./PlacesDetails";
-import BookTourDetails from "../../components/BookTourDetails";
-import BookActivitesDetails from "../../components/BookActivitesDetails";
+
 
 function CitySearchPage() {
 	return (

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../hotel_search_page/styles/color.css";
-import ListCardHotel from "../../components/ListCardHotel";
+
 import DatePicker from "react-datepicker";
-import axios from "axios";
+
 import "react-datepicker/dist/react-datepicker.css";
 import { FaPlane } from "react-icons/fa";
 import { BiDownArrow } from "react-icons/bi";
@@ -23,12 +23,12 @@ function FlightSearchPage() {
 						1. Berangkat ke surabaya
 					</p>
 					<div className="flex flex-col gap-y-6 items-center">
-						<ListCardFlight/>
-						<ListCardFlight/>
-						<ListCardFlight/>
-						<ListCardFlight/>
-						<ListCardFlight/>
-						<ListCardFlight/>
+						<ListCardFlight />
+						<ListCardFlight />
+						<ListCardFlight />
+						<ListCardFlight />
+						<ListCardFlight />
+						<ListCardFlight />
 					</div>
 				</div>
 			</div>
