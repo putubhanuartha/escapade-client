@@ -1,11 +1,11 @@
-import React, { useRef,  } from "react";
+import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.css";
 import { Pagination, Navigation } from "swiper";
 import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import destinationData from "../../model/destinationData";
-import Card from "../../components/card";
+import Card from "../../components/Card";
 
 export default function TravelContainer() {
 	const refPrev = useRef(null);

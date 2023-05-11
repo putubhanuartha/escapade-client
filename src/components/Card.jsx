@@ -1,7 +1,5 @@
-import React, { useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React from "react";
 import "swiper/swiper.css";
-import { Pagination, Navigation } from "swiper";
 export default function Card(props) {
 	return (
 		<div className="w-72 m-auto rounded-lg overflow-clip shadow-[0px_0px_7px_2px_rgba(0,0,0,0.2)] pb-6">
