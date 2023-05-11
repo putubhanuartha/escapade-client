@@ -9,6 +9,7 @@ import Footer from "./pages/main_pages/Footer";
 import FlightSearchPage from "./pages/flight_search_page/FlightSearchPage";
 import CitySearchPage from "./pages/city_search_page/CitySearchPage";
 import BookingComponent from "./components/BookingComponent";
+import FAQ from "./pages/faq_page/FAQ";
 export const GlobalAppContext = createContext();
 function App() {
 	const [isDisplayAuthBox, setIsDisplayAuthBox] = useState(false);
@@ -62,6 +63,7 @@ function App() {
 						element: <CitySearchPage />,
 					},
 					{ path: "/booking/*", element: <BookingComponent /> },
+					{ path: "/faq", element: <FAQ /> },
 				])}
 			/>
 			<Footer />
