@@ -5,7 +5,6 @@ import { Pagination, Navigation } from "swiper";
 import { AiFillCaretLeft } from "react-icons/ai";
 import { AiFillCaretRight } from "react-icons/ai";
 import { attractionsData } from "../../model/attractionsData";
-import Card from "../../components/card";
 import WideCard from "../../components/WideCard";
 
 export default function AttractionsContainer() {
