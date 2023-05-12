@@ -1,0 +1,3 @@
+footer ul li a{
+	@apply hover:text-slate-300 hover:underline;
+}

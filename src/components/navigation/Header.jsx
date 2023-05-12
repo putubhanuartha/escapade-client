@@ -3,6 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { GlobalAppContext } from "../../App";
 import TopBar from "./TopBar";
 import { BsPersonCircle } from "react-icons/bs";
+import { IoMdNotificationsOutline } from "react-icons/io";
 export default function Header() {
 	const {
 		setIsSidebarActive,
@@ -39,7 +40,7 @@ export default function Header() {
 						<TopBar />
 					</div>
 				</div>
-				<div className="hidden lg:flex">
+				<div className="hidden lg:flex lg:items-center lg:gap-x-5">
 					<button
 						className="btn-profile"
 						onClick={() => {
@@ -50,6 +51,9 @@ export default function Header() {
 							size={28}
 							color={`${isOnTop ? "#155e75" : "#d1d5db"}`}
 						/>
+					</button>
+					<button>
+						<IoMdNotificationsOutline size={30} color={`${isOnTop ? "#155e75" : "#d1d5db"}`} />
 					</button>
 				</div>
 
