@@ -42,7 +42,7 @@ function FlightSearchPage() {
 }
 const fetchSearchFlight = async (from, to) => {
   try {
-    const res = await axios.get(`http://localhost:3000/route`, {
+    const res = await axios.get(`http://localhost:3000/flight`, {
       params: {
         from,
         to,
