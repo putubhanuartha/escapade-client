@@ -1,8 +1,19 @@
 import React, { useContext, useState } from "react";
 import { GlobalAppContext } from "../App";
+import { LoginPops } from "./LoginPops";
+import ForgotPasswordPops from "./ForgotPasswordPops";
+import CreateAccountPops from "./CreateAccountPops";
+import OTPVerificationPops from "./OTPVerificationPops";
+export const authStateList = {
+	LoginState: 0,
+	SignupState: 1,
+	ForgotPasswordState: 2,
+	OTPVerificationState: 3,
+};
 function AuthenticationPops() {
 	const { isDisplayAuthBox, setIsDisplayAuthBox } =
 		useContext(GlobalAppContext);
+	const [authState, setauthState] = useState(authStateList.LoginState);
 	return (
 		<div
 			className={`fixed h-screen w-screen bg-[rgba(0,0,0,0.6)] z-50 ${
@@ -18,47 +29,30 @@ function AuthenticationPops() {
 					event.stopPropagation();
 				}}
 			>
-				<form
-					action="/"
-					className="flex flex-col bg-slate-100 px-6 pt-16 pb-6 font-poppins items-center gap-y-4 w-full rounded-md"
-				>
-					<p className="font-semibold mb-5">Log in to your account</p>
-					<input
-						placeholder="Email"
-						type="email"
-						name="email"
-						id="email"
-						className="px-2 py-1.5 w-full"
+				{authState === authStateList.LoginState && (
+					<LoginPops
+						authState={authState}
+						setauthState={setauthState}
 					/>
-					<input
-						placeholder="Password"
-						type="password"
-						name="password"
-						id="password"
-						className="px-2 py-1.5 w-full"
+				)}
+				{authState === authStateList.ForgotPasswordState && (
+					<ForgotPasswordPops
+						authState={authState}
+						setauthState={setauthState}
 					/>
-
-					<div className="lg:flex">
-						<div className="flex items-center gap-x-1">
-							<input
-								type="checkbox"
-								name="remember"
-								id="remember"
-							/>
-							<label htmlFor="remember">Remember Me</label>
-						</div>
-					</div>
-					<button
-						type="submit"
-						className="bg-purple-700 text-white px-5 py-1.5 rounded-md mt-3"
-					>
-						Log in
-					</button>
-					<div className="flex flex-col">
-						<button>Forgot Password ?</button>
-						<button>Create Account</button>
-					</div>
-				</form>
+				)}
+				{authState === authStateList.SignupState && (
+					<CreateAccountPops
+						authState={authState}
+						setauthState={setauthState}
+					/>
+				)}
+				{authState === authStateList.OTPVerificationState && (
+					<OTPVerificationPops
+						authState={authState}
+						setauthState={setauthState}
+					/>
+				)}
 			</div>
 		</div>
 	);

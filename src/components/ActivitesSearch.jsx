@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 function ActivitesSearch() {
+	const navigate = useNavigate();
+	const destinasiInput = useRef(null);
+	function handleSubmit(e) {
+		e.preventDefault();
+		if (destinasiInput.current.value) {
+			const destinasiObjInput = {
+				destinasiInput: destinasiInput.current.value,
+			};
+			navigate("/search-city", { state: destinasiObjInput });
+		} else {
+			alert("masukkan data dengan lengkap");
+		}
+	}
 	return (
 		<form
-			action="/"
+			onSubmit={handleSubmit}
 			className="gap-y-3 flex flex-col"
 		>
 			<div className="flex flex-col border-[0.2px] border-gray-300 px-3 pt-1">
@@ -13,6 +27,7 @@ function ActivitesSearch() {
 					Destinasi atau nama properti
 				</label>
 				<input
+					ref={destinasiInput}
 					type="text"
 					name="destinasi"
 					id="destinasi"

@@ -8,14 +8,25 @@ import HotelSearchPage from "./pages/hotel_search_page/HotelSearchPage";
 import Footer from "./pages/main_pages/Footer";
 import FlightSearchPage from "./pages/flight_search_page/FlightSearchPage";
 import CitySearchPage from "./pages/city_search_page/CitySearchPage";
-import BookingComponent from "./components/BookingComponent";
+
 import FAQ from "./pages/faq_page/FAQ";
+import { ProfilePage } from "./pages/profile_page/ProfilePage";
+import { WaitPayment } from "./pages/payment_page/WaitPayment";
+import { PaymentMethod } from "./pages/payment_page/PaymentMethod";
 export const GlobalAppContext = createContext();
+const statePlanOption = {
+	FlightSearchState: 0,
+	HotelSearchState: 1,
+	ActivitiesSearchState: 2,
+};
 function App() {
 	const [isDisplayAuthBox, setIsDisplayAuthBox] = useState(false);
 	const [isSideBarActive, setIsSidebarActive] = useState(false);
 	const [toggleTopBar, setToggleTopBar] = useState(false);
 	const [isScrollUp, setIsScrollUp] = useState(true);
+	const [indexState, setIndexState] = useState(
+		statePlanOption.FlightSearchState
+	);
 	const [isOnTop, setIsOnTop] = useState(true);
 	useEffect(() => {
 		let prevValueScrollY = null;
@@ -37,6 +48,7 @@ function App() {
 	function checkIsOnTop(windowScroll) {
 		return windowScroll == 0 ? true : false;
 	}
+
 	return (
 		<GlobalAppContext.Provider
 			value={{
@@ -48,6 +60,9 @@ function App() {
 				setToggleTopBar,
 				isScrollUp,
 				isOnTop,
+				statePlanOption,
+				indexState,
+				setIndexState,
 			}}
 		>
 			<AuthenticationPops />
@@ -62,8 +77,10 @@ function App() {
 						path: "/search-city/*",
 						element: <CitySearchPage />,
 					},
-					{ path: "/booking/*", element: <BookingComponent /> },
 					{ path: "/faq", element: <FAQ /> },
+					{ path: "/profile", element: <ProfilePage /> },
+					{ path: "/payment/waiting", element: <WaitPayment /> },
+					{ path: "/payment/choose-method", element: <PaymentMethod /> },
 				])}
 			/>
 			<Footer />

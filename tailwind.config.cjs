@@ -16,7 +16,7 @@ module.exports = {
 				2000: "2000ms",
 			},
 			backgroundImage: {
-				heroImage: "url('/hero.jpg')",
+				heroImage: "url('/hero.webp')",
 			},
 			fontFamily: {
 				poppins: ["Poppins", ...defaultTheme.fontFamily.sans],

@@ -13,11 +13,8 @@ function CityListComponent() {
 		<>
 			<div>
 				<h2 className="font-semibold text-lg sm:text-xl lg:text-start font-poppins text-center md:text-2xl">
-					Most Popular Destinations
+					Tour and Activity
 				</h2>
-				<p className="font-normal text-sm md:text-base lg:text-start lg:text-lg font-poppins text-center">
-					Explore point of interest in various places around the world
-				</p>
 			</div>
 			<div
 				id="card_container"

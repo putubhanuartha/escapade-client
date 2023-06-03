@@ -1,32 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { checkDateWithToDate } from "../helpers/checker";
 import "react-datepicker/dist/react-datepicker.css";
 function HotelSearch() {
+	const today = new Date();
+	const nextDay = new Date(new Date().getTime() + 1000 * 60 * 60 * 24);
+	const navigate = useNavigate();
 	const [indexDropdown, setIndexDropdown] = useState(-1);
-	const [dayRangeTo, setDayRangeTo] = useState(new Date());
-	const [dayRangeFrom, setDayRangeFrom] = useState(new Date());
+	const [dayRangeTo, setDayRangeTo] = useState(nextDay);
+	const [dayRangeFrom, setDayRangeFrom] = useState(today);
+	const [dayRange, setdayRange] = useState(1);
+	const [totalGuest, setTotalGuest] = useState(1);
+	const destinationInput = useRef(null);
+	const keywordsInput = useRef(null);
+	useEffect(() => {
+		const milisDifferences = dayRangeTo.getTime() - dayRangeFrom.getTime();
+		const day = Math.ceil(milisDifferences / (1000 * 60 * 60 * 24));
+		setdayRange(day);
+	}, [dayRangeFrom, dayRangeTo]);
 	function handleSubmit(e) {
 		e.preventDefault();
-		const destinasi = e.target.elements.destinasi.value;
-		const keyword = e.target.elements.keyword.value;
-		axios
-			.post(
-				"http://localhost:5500/api/search-hotel",
-				{
-					destinasi,
-					keyword,
-				},
-				{ headers: { "Content-Type": "application/json" } }
-			)
-			.then((response) => {
-				if (response.status == 200) {
-					window.location.replace("https://google.com");
+		const hotelInputUser = {
+			destinationInput: destinationInput.current.value,
+			keywordsInput: keywordsInput.current.value,
+			totalGuest,
+			dateFrom: `${dayRangeFrom.getFullYear()}-${(dayRangeFrom.getMonth() + 1)
+				.toString()
+				.padStart(2, "0")}-${dayRangeFrom
+				.getDate()
+				.toString()
+				.padStart(2, "0")}`,
+			dateTo: `${dayRangeTo.getFullYear()}-${(dayRangeTo.getMonth() + 1)
+				.toString()
+				.padStart(2, "0")}-${dayRangeTo.getDate().toString().padStart(2, "0")}`,
+		};
+		function checkIsEmpty(obj) {
+			for (let key in obj) {
+				if (!obj[key]) {
+					return true;
 				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			}
+			return false;
+		}
+		if (checkIsEmpty(hotelInputUser)) {
+			alert("isi data dengan lengkap");
+		} else {
+			navigate("/search-hotel", { state: hotelInputUser });
+		}
 	}
 	return (
 		<form
@@ -41,6 +62,7 @@ function HotelSearch() {
 					Destinasi atau nama properti
 				</label>
 				<input
+					ref={destinationInput}
 					type="text"
 					name="destinasi"
 					id="destinasi"
@@ -49,31 +71,27 @@ function HotelSearch() {
 				/>
 			</div>
 			<div className="flex items-center justify-evenly gap-x-3 border-[0.4px] border-gray-300">
-				<input
-					type="hidden"
-					name="datefrom"
-					id="datefrom"
-					value={dayRangeFrom}
-				/>
-				<input
-					type="hidden"
-					name="dateto"
-					id="dateto"
-					value={dayRangeTo}
-				/>
 				<div>
 					<p className="font-poppins ml-2">From</p>
 					<DatePicker
 						selected={dayRangeFrom}
-						onChange={(date) => setDayRangeFrom(date)}
+						onChange={(date) => {
+							if (checkDateWithToDate(today, date, dayRangeTo)) {
+								setDayRangeFrom(date);
+							}
+						}}
 					/>
 				</div>
-				<p className="font-semibold w-11">2 hari</p>
+				<p className="font-semibold w-11">{dayRange} hari</p>
 				<div>
 					<p className="font-poppins ml-2">To</p>
 					<DatePicker
 						selected={dayRangeTo}
-						onChange={(date) => setDayRangeTo(date)}
+						onChange={(date) => {
+							if (checkDateWithToDate(today, dayRangeFrom, date)) {
+								setDayRangeTo(date);
+							}
+						}}
 					/>
 				</div>
 			</div>
@@ -85,10 +103,11 @@ function HotelSearch() {
 					}}
 				>
 					<p className="text-gray-500">Jumlah tamu kamar</p>
-					<p>Dewasa 1</p>
+					<p>{totalGuest} orang</p>
 				</div>
 
 				<PlanHotel
+					setTotalGuest={setTotalGuest}
 					indexDropdown={indexDropdown}
 					setIndexDropdown={setIndexDropdown}
 				/>
@@ -102,6 +121,7 @@ function HotelSearch() {
 						Kata kunci (opsional)
 					</label>
 					<input
+						ref={keywordsInput}
 						type="text"
 						name="keyword"
 						id="keywordS"
@@ -119,7 +139,10 @@ function HotelSearch() {
 		</form>
 	);
 }
-function PlanHotel({ indexDropdown, setIndexDropdown }) {
+function PlanHotel({ indexDropdown, setIndexDropdown, setTotalGuest }) {
+	const [dewasaCount, setDewasaCount] = useState(1);
+	const [anakCount, setAnakCount] = useState(0);
+	const [bayiCount, setbayiCount] = useState(0);
 	return (
 		<ul
 			className={`absolute px-2 z-40 bg-white rounded-sm py-2 shadow-[0px_0px_5px_2px_rgba(0,0,0,0.2)] -right-24 -left-28 mt-2 ${
@@ -134,7 +157,10 @@ function PlanHotel({ indexDropdown, setIndexDropdown }) {
 						type="number"
 						className="w-12 py-1 outline-none border-none caret-transparent"
 						min={1}
-						defaultValue={1}
+						onChange={(e) => {
+							setDewasaCount(e.target.value);
+						}}
+						defaultValue={dewasaCount}
 						max={10}
 						placeholder="number"
 						onKeyDown={(event) => event.preventDefault()}
@@ -146,10 +172,13 @@ function PlanHotel({ indexDropdown, setIndexDropdown }) {
 						<p className="text-xs">(2-11 tahun)</p>
 					</div>
 					<input
+						onChange={(e) => {
+							setAnakCount(e.target.value);
+						}}
 						type="number"
 						className="w-12 py-1 outline-none border-none caret-transparent"
 						min={0}
-						defaultValue={0}
+						defaultValue={anakCount}
 						max={10}
 						placeholder="number"
 						onKeyDown={(event) => event.preventDefault()}
@@ -164,7 +193,10 @@ function PlanHotel({ indexDropdown, setIndexDropdown }) {
 						type="number"
 						className="w-12 py-1 outline-none border-none caret-transparent"
 						min={0}
-						defaultValue={0}
+						onChange={(e) => {
+							setbayiCount(e.target.value);
+						}}
+						defaultValue={bayiCount}
 						max={10}
 						placeholder="number"
 						onKeyDown={(event) => event.preventDefault()}
@@ -173,7 +205,12 @@ function PlanHotel({ indexDropdown, setIndexDropdown }) {
 			</div>
 			<button
 				type="button"
-				onClick={() => setIndexDropdown(-1)}
+				onClick={() => {
+					setTotalGuest(
+						Number(dewasaCount) + Number(anakCount) + Number(bayiCount)
+					);
+					setIndexDropdown(-1);
+				}}
 				className="hover:text-black text-cold hover:bg-slate-300 rounded-sm mt-2 ml-auto block px-2 py-0.5 bg-cyan-600 hover:shadow-lg transition-all duration-300"
 			>
 				Selesai
